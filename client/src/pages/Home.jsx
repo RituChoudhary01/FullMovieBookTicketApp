@@ -8,7 +8,7 @@ function Home() {
     <>
     <HeroSection/>
     <FeaturedSection/>
-    <TralersSection/>
+    <TrailersSection/>
     </>
   )
 }
