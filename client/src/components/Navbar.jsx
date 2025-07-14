@@ -14,7 +14,7 @@ const Navbar = () => {
   const navigate = useNavigate()
   const {favoriteMovies} = useAppContext()
   return (
-    <div className='Fixed top-0 left-0 z-50 w-full flex items-center justify-between px-6 md:px-16 lg:px-36 py-5'>
+    <div className='fixed top-0 left-0 z-50 w-full flex items-center justify-between px-6 md:px-16 lg:px-36 py-5'>
       <Link to='/' className='max-md:flex-1'>
         <img src={assets.logo} alt="Logo" className='w-36 h-auto'/>
       </Link>
@@ -27,6 +27,7 @@ const Navbar = () => {
       {favoriteMovies.length > 0 && <Link onClick={()=>{scrollTo(0,0); setIsOpen(false)}} to='/favorite'>Favorites</Link>}
       { user &&
       <Link onClick={()=>{scrollTo(0,0); setIsOpen(false)}} to='/my-booking'>My Booking</Link> }
+      <Link onClick={()=>{scrollTo(0,0); setIsOpen(false);}} to='/admin'>Dashboard</Link> 
       </div>
       <div className='flex items-center gap-8'>
         <SearchIcon className='max-md:hidden w-6 h-6 cursor-pointer'/>

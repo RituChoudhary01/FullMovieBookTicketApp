@@ -2,8 +2,6 @@ import Show from "../models/Show.js";
 import Booking from "../models/Booking.js";
 import Stripe from 'stripe';
 import { inngest } from '../inngest/index.js';
-
-
 // Function to check if selected seats are available
 const checkSeatsAvailability = async (showId, selectedSeats) => {
   try {
@@ -40,7 +38,7 @@ export const createBooking = async (req, res) => {
       bookedSeats: selectedSeats,
     });
 
-    selectedSeats.forEach((seat) => {
+    selectedSeats.map((seat) => {
       showData.occupiedSeats[seat] = userId;
     });
     showData.markModified('occupiedSeats');
@@ -60,9 +58,9 @@ export const createBooking = async (req, res) => {
     }];
 
     const session = await stripeInstance.checkout.sessions.create({
-      success_url: `${origin}/loading/my-bookings`,
-      cancel_url: `${origin}/my-bookings`,
-      line_items,
+      success_url: `${origin}/loading/my-booking`,
+      cancel_url: `${origin}/my-booking`,
+      line_items:line_items,
       mode: 'payment',
       metadata: {
         bookingId: booking._id.toString()
@@ -87,6 +85,8 @@ export const createBooking = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
+
+
 
 // API to get all occupied seats for a show
 export const getOccupiedSeats = async (req, res) => {

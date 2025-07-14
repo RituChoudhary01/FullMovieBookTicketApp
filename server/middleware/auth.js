@@ -6,13 +6,11 @@ export const protectAdmin = async (req, res, next) => {
     const user = await clerkClient.users.getUser(userId);
 
     if (user.privateMetadata.role !== 'admin') {
-      return res.status(403).json({ success: false, message: "Not authorized" });
+      return res.json({ success: false, message: "Not authorized" });
     }
-
-    // If admin, allow next middleware or controller
     next();
   } catch (error) {
     console.error(error.message);
-    return res.status(500).json({ success: false, message: "Server error" });
+    return res.json({ success: false, message: "not authorized" });
   }
 };

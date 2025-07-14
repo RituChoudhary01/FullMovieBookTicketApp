@@ -22,7 +22,7 @@ function SeatLayout() {
 
   const getShow = async () => {
     try{
-      const {data} = await axios.get('/api/show/${id}')
+      const {data} = await axios.get(`/api/show/${id}`)
       if(data.success){
         setShow(data)
       }
@@ -58,6 +58,8 @@ function SeatLayout() {
       </div>
     </div>
   )
+
+  
  const getOccupiedSeats = async()=>{
   try{
     const { data } = await axios.get(`/api/booking/seats/${selectedTime.showId}`)
@@ -79,6 +81,7 @@ function SeatLayout() {
     },{headers:{Authorization:`Bearer ${await getToken()}`}})
     if(data.success){
       window.location.href = data.url;
+      navigate('/my-booking')
     }else{
       toast.error(data.message)
     }
@@ -126,14 +129,15 @@ function SeatLayout() {
           </div>
           <div className='grid grid-cols-2 gap-11'>
             {groupRows.slice(1).map((group) => (
-              <div key={group[0]} className='grid grid-cols-2 gap-11'>
+              <div key={group[0]} className='grid grid-cols-2 md:grid-cols-1 gap-8 md:gap-2 mb-6'>
                 {group.map(row => renderSeats(row))}
               </div>
             ))}
           </div>
+   
         </div>
 
-        <button onClick={()=>navigate('/my-booking')} className='flex items-center gap-1 mt-20 px-10 py-3 text-sm bg-primary hover:bg-primary-dull transition rounded-full font-medium cursor-pointer active:scale-95'>
+        <button onClick={bookTicket} className='flex items-center gap-1 mt-20 px-10 py-3 text-sm bg-primary hover:bg-primary-dull transition rounded-full font-medium cursor-pointer active:scale-95'>
           Proceed to Checkout
           <ArrowRightIcon strokeWidth={3} className='w-3 h-4' />
         </button>

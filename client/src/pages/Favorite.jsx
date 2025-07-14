@@ -12,7 +12,7 @@ function Favorite() {
 
     <h1 className='text-lg font-medium my-4'> Your Favorite Movies </h1>
     <div className='flex flex-wrap max-sm:justify-center gap-8'>
-      {dummyShowsData.map((movie)=>(
+      {favoriteMovies.map((movie)=>(
         <MovieCart movie={movie} key={movie._id}/>
       ))}
     </div>

@@ -1,6 +1,7 @@
 import { LayoutDashboardIcon, ListCollapseIcon, ListIcon, PlusSquareIcon } from 'lucide-react'
 import React from 'react'
 import { assets } from '../../assets/assets'
+import { NavLink } from 'react-router-dom'
 const AdminSidebar = () => {
   const user = {
     firstName:'Admin',
@@ -35,3 +36,5 @@ const AdminSidebar = () => {
     </div>
   )
 }
+
+export default AdminSidebar

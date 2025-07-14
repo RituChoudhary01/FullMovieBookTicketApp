@@ -9,7 +9,7 @@ export const inngest = new Inngest({ id: "movie-ticket-booking" });
 // 1. Sync Clerk user on creation
 const syncUserCreation = inngest.createFunction(
   { id: "sync-user-from-clerk" },
-   { event: "user.created" },
+  { event: "clerk/user.created" },
   async ({ event }) => {
     const { id, first_name, last_name, email_addresses, image_url } = event.data;
     const userData = {
@@ -25,7 +25,7 @@ const syncUserCreation = inngest.createFunction(
 // 2. Delete Clerk user
 const syncUserDeletion = inngest.createFunction(
   { id: "delete-user-with-clerk" },
-  { event: "user.deleted" },
+  { event: "clerk/user.deleted" },
   async ({ event }) => {
     const { id } = event.data;
     await User.findByIdAndDelete(id);
@@ -35,7 +35,7 @@ const syncUserDeletion = inngest.createFunction(
 // 3. Update Clerk user
 const syncUserUpdation = inngest.createFunction(
   { id: "update-user-from-clerk" },
-  { event: "user.updated" },
+  { event: "clerk/user.updated" },
   async ({ event }) => {
     const { id, first_name, last_name, email_addresses, image_url } = event.data;
     const userData = {
@@ -75,13 +75,11 @@ const sendBookingConfirmationEmail = inngest.createFunction(
   { event: "app/show.booked" },
   async ({ event }) => {
     const { bookingId } = event.data;
-    const booking = await Booking.findById(bookingId)
-      .populate({ path: "show", populate: { path: "movie" } })
-      .populate("user");
+    const booking = await Booking.findById(bookingId).populate({ path: "show", populate: { path: "movie",model:"Movie"}}).populate("user");
 
     await sendEmail({
       to: booking.user.email,
-      subject: `Payment Confirmation: \"${booking.show.movie.title}\" booked!`,
+      subject: `Payment Confirmation: "${booking.show.movie.title}" booked!`,
       body: `<div style='font-family:Arial, sans-serif; line-height:1.5;'>
         <h2>Hi ${booking.user.name},</h2>
         <p>Your booking for <strong style='color:#f84565;'>\"${booking.show.movie.title}\"</strong> is confirmed.</p>

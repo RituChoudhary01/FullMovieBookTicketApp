@@ -2,7 +2,6 @@ import React from 'react'
 import { ArrowRight } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import BlurCircle from './BlurCircle'
-import { dummyShowsData } from '../assets/assets'
 import MovieCart from './MovieCart'
 import { useAppContext } from '../context/AppContext'
 
@@ -21,7 +20,7 @@ function FeaturedSection() {
     </div>
 
     <div className='flex flex-wrap max-sm:justify-center gap-8 mt-8'>
-      {dummyShowsData.slice(0,4).map((show)=>(
+      {shows.slice(0,8).map((show)=>(
         <MovieCart key={show._id} movie = {show}/>
       ))}
     </div>

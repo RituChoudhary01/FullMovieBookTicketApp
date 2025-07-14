@@ -10,3 +10,5 @@ const AdminNavbar = () => {
     </div>
   )
 }
+
+export default AdminNavbar
