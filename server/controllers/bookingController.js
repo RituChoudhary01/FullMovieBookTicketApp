@@ -52,7 +52,7 @@ export const createBooking = async (req, res) => {
         product_data: {
           name: showData.movie.title
         },
-        unit_amount: Math.floor(booking.amount * 100),
+        unit_amount: Math.floor(booking.amount) * 100
       },
       quantity: 1
     }];
@@ -63,6 +63,12 @@ export const createBooking = async (req, res) => {
       line_items:line_items,
       mode: 'payment',
       metadata: {
+        // await Booking.findByIdAndUpdate(bookingId, {
+        //   isPaid: true,
+        //   paymentLink: "",
+        // });
+        
+
         bookingId: booking._id.toString()
       },
       expires_at: Math.floor(Date.now() / 1000) + 30 * 60,

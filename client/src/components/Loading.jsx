@@ -8,7 +8,7 @@ function Loading() {
   useEffect(()=>{
     if(nextUrl){
       setTimeout(()=>{
-        navigate('/'+nextUrl)
+        navigate('/' + nextUrl)
       },8000)
     }
   },[])

@@ -11,10 +11,11 @@ const showRouter = express.Router();
 
 // Get now playing movies from TMDB (admin-only to avoid misuse)
 // protectAdmin
-showRouter.get('/now-playing',protectAdmin, getNowPlayingMovies);
+// showRouter.get('/now-playing',protectAdmin, getNowPlayingMovies);
+showRouter.get('/now-playing',getNowPlayingMovies);
 
 // Add new show to the database (admin-only)
-showRouter.post('/add',protectAdmin, addShow);
+showRouter.post('/add',addShow);
 
 // Get all upcoming shows (public)
 showRouter.get('/all', getShows);
