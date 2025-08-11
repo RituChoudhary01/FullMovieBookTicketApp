@@ -49,7 +49,7 @@ const syncUserUpdation = inngest.createFunction(
 
 // 4. Cancel unpaid booking after 10 mins
 const releaseSeatsAndDeleteBooking = inngest.createFunction(
-  { id: "release-delete-booking" },
+  { id: "release-seats-delete-booking" },
   { event: "app/checkpayment" },
   async ({ event, step }) => {
     const bookingId = event.data.bookingId;

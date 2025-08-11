@@ -62,16 +62,10 @@ export const createBooking = async (req, res) => {
       cancel_url: `${origin}/my-booking`,
       line_items:line_items,
       mode: 'payment',
-      metadata: {
-        // await Booking.findByIdAndUpdate(bookingId, {
-        //   isPaid: true,
-        //   paymentLink: "",
-        // });
-        
-
-        bookingId: booking._id.toString()
-      },
       expires_at: Math.floor(Date.now() / 1000) + 30 * 60,
+      metadata: {
+        bookingId: booking._id.toString()  
+      }
     });
 
     booking.paymentLink = session.url;
